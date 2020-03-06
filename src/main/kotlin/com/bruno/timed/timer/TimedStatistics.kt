@@ -25,6 +25,14 @@ class TimedStatistics(
         count = count + 1
     )
 
+    override fun toString(): String = """
+        min: ${min.toMillis()}
+        max: ${max.toMillis()}
+        sum: ${sum.toMillis()}
+        avg: ${avg().toMillis()}
+        count: $count
+    """.trimIndent()
+
     private fun getMax(a: Duration, b: Duration) = if (a > b) a else b
     private fun getMin(a: Duration, b: Duration) = if (a < b) a else b
 }

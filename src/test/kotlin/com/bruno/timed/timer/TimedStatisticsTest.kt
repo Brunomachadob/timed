@@ -53,6 +53,22 @@ internal class TimedStatisticsTest {
         assertEquals(6, statistics.sum().toMinutes())
     }
 
+    @Test
+    fun `should return the right toString`() {
+        val statistics = buildStatistics(
+            Duration.ofMillis(2),
+            Duration.ofMillis(4)
+        )
+
+        assertEquals("""
+            min: 2
+            max: 4
+            sum: 6
+            avg: 3
+            count: 2
+        """.trimIndent(), statistics.toString())
+    }
+
     private fun buildStatistics(vararg intervals: Duration) = intervals
         .fold(TimedStatistics()) { statistics, duration ->
             statistics.addTime(duration)
